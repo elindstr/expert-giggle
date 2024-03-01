@@ -1,6 +1,6 @@
 const tips = require('express').Router();
 const { readFromFile, readAndAppend } = require('../helpers/fsUtils');
-const uuid = require('../helpers/uuid');
+const { v4: uuidv4 } = require('uuid');
 
 // GET Route for retrieving all the tips
 tips.get('/', (req, res) => {
@@ -18,7 +18,7 @@ tips.post('/', (req, res) => {
       username,
       tip,
       topic,
-      tip_id: uuid(),
+      tip_id: uuidv4(),
     };
 
     readAndAppend(newTip, './db/tips.json');

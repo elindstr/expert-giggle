@@ -1,20 +1,68 @@
 [
-  {
-    "username": "j",
-    "topic": "UX",
-    "tip": "Don't use comic sans",
-    "tip_id": "37t8"
-  },
-  {
-    "username": "Sarah",
-    "topic": "UI",
-    "tip": "Make your application accessible by adding alt properties to elements",
-    "tip_id": "701e"
-  },
-  {
-    "username": "CoolGuy1",
-    "tip": "Don't use three different fonts on the same page",
-    "topic": "UX",
-    "tip_id": "0a46"
-  }
+    {
+        "username": "j",
+        "topic": "UX",
+        "tip": "Don't use comic sans",
+        "tip_id": "3fe5d166-2f9e-4e3d-87a7-25a561207c6c"
+    },
+    {
+        "username": "Sarah",
+        "topic": "UI",
+        "tip": "Make your application accessible by adding alt properties to elements",
+        "tip_id": "ca0616fa-f603-4d85-a9c6-fa62c73a9bf9"
+    },
+    {
+        "username": "CoolGuy1",
+        "tip": "Don't use three different fonts on the same page",
+        "topic": "UX",
+        "tip_id": "c83c28af-9197-4f2f-b119-03236ecfc0b6"
+    },
+    {
+        "username": "j",
+        "tip": "Don't use comic sans",
+        "topic": "UX",
+        "tip_id": "f3356786-36ae-4eb8-a4cb-5919d1f63cad"
+    },
+    {
+        "username": "Eric",
+        "tip": "Hello World",
+        "topic": "UX",
+        "tip_id": "2489beb0-ca68-44c3-9289-cc517a3e5aab"
+    },
+    {
+        "username": "Eric",
+        "tip": "Hello World",
+        "topic": "UX",
+        "tip_id": "e0e11464-91a7-4d6a-b81a-f78b8402754b"
+    },
+    {
+        "username": "Eric",
+        "tip": "Hello World",
+        "topic": "UX",
+        "tip_id": "05eeb6a1-d043-4248-a775-2f5a9c156358"
+    },
+    {
+        "username": "Eric",
+        "tip": "Hello World",
+        "topic": "UX",
+        "tip_id": "a3d7e332-b17d-442f-ae12-7f265c872fd1"
+    },
+    {
+        "username": "Eric",
+        "tip": "H",
+        "topic": "UX",
+        "tip_id": "7b4631e2-ecda-4217-899c-af6bae6a80ff"
+    },
+    {
+        "username": "Eric",
+        "tip": "H",
+        "topic": "",
+        "tip_id": "9c584e48-4c05-491a-b8f7-ba972e2c3265"
+    },
+    {
+        "username": "Eric",
+        "tip": "",
+        "topic": "",
+        "tip_id": "49ef5ec9-688b-4c35-b46c-6431f127eb9c"
+    }
 ]

@@ -1,10 +1,16 @@
 const tipForm = document.getElementById('tip-form');
 const tipsContainer = document.getElementById('tip-container');
+const fbBtn = document.getElementById('feedback-btn');
+
+fbBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  window.location.href = '/feedback';
+});
 
 const createCard = (tip) => {
   // Create card
   const cardEl = document.createElement('div');
-  cardEl.classList.add('card', 'mb-3');
+  cardEl.classList.add('card', 'mb-3', 'm-3');
   cardEl.setAttribute('key', tip.tip_id);
 
   // Create card header
@@ -34,11 +40,10 @@ const createCard = (tip) => {
 // Get a list of existing tips from the server
 const getTips = () =>
   fetch('/api/tips', {
-    method: 'GET', // or 'PUT'
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
-    // body: JSON.stringify(data),
   })
     .then((response) => response.json())
     .then((data) => data)
@@ -67,6 +72,77 @@ const postTip = (tip) =>
 // When the page loads, get all the tips
 getTips().then((data) => data.forEach((tip) => createCard(tip)));
 
+// Function to validate the tips that were submitted
+// TODO: Use this function to validate the form data. Accepts an object with {username, topic, tip}. Returns { isValid: boolean, and errors: Object }
+const validateTip = (newTip) => {
+  const { username, topic, tip } = newTip;
+
+  // Object to hold our error messages until we are ready to return
+  const errorState = {
+    username: '',
+    tip: '',
+    topic: '',
+  };
+
+  // Bool value if the username is valid
+  const utest = username.length >= 4;
+  if (!utest) {
+    errorState.username = 'Invalid username!';
+  }
+
+  // Bool value to see if the tip being added is at least 15 characters long
+  const tipContentCheck = tip.length > 15;
+  if (!tipContentCheck) {
+    errorState.tip = 'Tip must be at least 15 characters';
+  }
+
+  // Bool value to see if the topic is either UX or UI
+  const topicCheck = topic.includes('UX' || 'UI');
+  if (!topicCheck) {
+    errorState.topic = 'Topic not relevant to UX or UI';
+  }
+
+  const result = {
+    isValid: !!(utest && tipContentCheck && topicCheck),
+    errors: errorState,
+  };
+
+  // Return result object with a isValid boolean and an errors object for any errors that may exist
+  return result;
+};
+
+// Helper function to deal with errors that exist in the result
+const showErrors = (errorObj) => {
+  const errors = Object.values(errorObj);
+  errors.forEach((error) => {
+    if (error.length > 0) {
+      alert(error);
+    }
+  });
+};
+
+// Helper function to send a POST request to the diagnostics route (/api/diagnostics)
+const submitDiagnostics = (submissionObj) => {
+  // TODO: your code here
+  console.log(JSON.stringify(submissionObj));
+  alert(JSON.stringify(submissionObj));
+
+  fetch('/api/diagnostics', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(submissionObj),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("sucessfully posted diagnostics", data);
+    })
+    .catch((error) => {
+      console.error('error posting diagnostics:', error);
+    });
+};
+
 // Function to handle when a user submits the feedback form
 const handleFormSubmit = (e) => {
   e.preventDefault();
@@ -85,8 +161,12 @@ const handleFormSubmit = (e) => {
     tip: tipContent,
   };
 
-  // Make a fetch POST request to the server
-  postTip(newTip);
+  // Run the tip object through our validator function
+  const submission = validateTip(newTip);
+  console.log("submission:", submission)
+
+  // If the submission is valid, post the tip. Otherwise, handle the errors.
+  return submission.isValid ? postTip(newTip) : submitDiagnostics(submission);
 };
 
 // Listen for when the form is submitted
